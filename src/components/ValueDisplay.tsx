@@ -8,7 +8,7 @@ const ValueDisplay = () => {
   useEffect(() => {
     const fetchValue = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:5000/api/value"); // Flask back-end endpoint
+        const response = await axios.get("https://462f-15-204-240-135.ngrok-free.app/api/value"); // Flask back-end endpoint
         setValue(response.data.value);
         setLoading(false);
       } catch (error) {
