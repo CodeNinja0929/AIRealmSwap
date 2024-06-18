@@ -115,4 +115,4 @@ def get_output_amount(input_amount, input_reserve, output_reserve):
     return numerator // denominator
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
