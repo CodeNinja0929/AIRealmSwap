@@ -47,7 +47,7 @@ export default function App() {
               <div className="img-content-wrap">
                 <SwapWidget
                   permit2
-                  routerUrl="https://api.uniswap.org/v1/"
+                  routerUrl="https://api.uniswap.org/v3/"
                   width={"100%"}
                   dialog={dialog.current}
                   defaultOutputTokenAddress={AIRM}
