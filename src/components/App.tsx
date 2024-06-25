@@ -10,6 +10,9 @@ import ValueDisplay from "./ValueDisplay";
 
  
 const AIRM = "0xf250b1f6193941bb8bff4152d719edf1a59c0e69";
+const jsonRpcUrlMap = {
+  1: ['https://mainnet.infura.io/v3/4bae455864ff41edb8da75a9d6b62d5a']
+};
 
 declare global {
   interface Window {
@@ -70,10 +73,8 @@ export default function App() {
                 {provider ? (
                   <SwapWidget
                     provider={provider}
-                    permit2
+                    jsonRpcUrlMap={jsonRpcUrlMap}
                     width="100%"
-                    routerUrl="https://api.uniswap.org/v1/"
-                    dialog={dialog.current}
                     defaultOutputTokenAddress={AIRM}
                     tokenList={TOKEN_LIST}
                     defaultChainId={1}
