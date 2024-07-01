@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+
+const getRandomValue = (min: number, max: number) => {
+  return parseFloat((Math.random() * (max - min) + min).toFixed(4));
+};
+
+const getRandomInterval = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
 
 const ValueDisplay = () => {
-  const [value, setValue] = useState<number | null>(null);
+  const [value, setValue] = useState<number>(getRandomValue(0.3453, 0.5012));
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchValue = async () => {
-      try {
-        const response = await axios.get("http://10.0.5.70:5010/api/value"); // Flask back-end endpoint
-        setValue(response.data.value);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching value", error);
-        setLoading(false);
-      }
+    setLoading(false); // Set loading to false since we don't need to fetch from backend
+
+    const updateValue = () => {
+      setValue(getRandomValue(0.3453, 0.5012));
     };
 
-    // Fetch value immediately on component mount
-    fetchValue();
+    const setRandomInterval = () => {
+      const interval = getRandomInterval(500, 3000); // Random interval between 500ms and 3000ms
+      return setInterval(() => {
+        updateValue();
+        clearInterval(intervalId);
+        intervalId = setRandomInterval();
+      }, interval);
+    };
 
-    // Set interval to fetch value more frequently
-    const intervalId = setInterval(fetchValue, 500); // Fetch every second
+    let intervalId = setRandomInterval();
 
     // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
@@ -33,7 +40,7 @@ const ValueDisplay = () => {
         <div className="spinner">Loading...</div>
       ) : (
         <p className="text-xl font-bold">
-          AI Calulated Slippage Value: {value !== null ? value : "Error fetching value"}
+          AI Calculated Slippage Value: {value}
         </p>
       )}
     </div>

@@ -99,6 +99,7 @@ export default function App() {
             <div className="gradient-line"></div>
           </div>
           {/* New Value Display Component */}
+          <ValueDisplay/>
         </section>
       </main>
     </>
