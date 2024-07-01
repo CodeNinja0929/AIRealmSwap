@@ -11,21 +11,7 @@ body * {
 .TokenOptions__OnHover-sc-xx1k3q-2 {
   display: none;
 }
-.Dialog__HiddenWrapper-sc-c8nkza-4 {
-  max-width: 500px;
-  left: calc(50% - 250px) !important;
-  max-height: 70%;
-  top: 15% !important;
-}
 
-@media screen and (max-width: 500px) {
-  .Dialog__HiddenWrapper-sc-c8nkza-4 {
-    max-width: 98%;
-    left: calc(49% - 48vw) !important;
-    max-height: 70%;
-    top: 15% !important;
-  } 
-}
 
 .Button-sc-1soikk5-1 {
   @apply hover:bg-gray-100 active:bg-gray-200;
@@ -83,7 +69,7 @@ button[color="accent"]:not(:disabled):hover *{
 }
 
 [class*=Dialog__Modal-] >div:last-of-type {
-  padding-top: 1em;
+  padding-top: 0em;
 }
 
 [class*=TokenOptions__TokenButton-] {

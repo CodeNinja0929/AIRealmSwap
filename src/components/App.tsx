@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { SwapWidget } from "@uniswap/widgets";
+import { SwapWidget} from "@uniswap/widgets";
 import { ethers } from "ethers";
 
 import "@uniswap/widgets/fonts.css";
@@ -7,11 +7,10 @@ import "@uniswap/widgets/fonts.css";
 import { TOKEN_LIST } from "../token_list";
 import Header from "./Header";
 import ValueDisplay from "./ValueDisplay";
-
- 
 const AIRM = "0xf250b1f6193941bb8bff4152d719edf1a59c0e69";
 const jsonRpcUrlMap = {
-  1: ['https://mainnet.infura.io/v3/4bae455864ff41edb8da75a9d6b62d5a']
+  1: ['https://cloudflare-eth.com']
+  //1: ['https://mainnet.infura.io/v3/099fc58e0de9451d80b18d7c74caa7c1']
 };
 
 declare global {
@@ -22,8 +21,15 @@ declare global {
 
 export default function App() {
   const dialog = useRef<HTMLDivElement>(null);
+  const [loading, setLoading] = useState(false);
   const [fixedHeader, setFixedHeader] = useState(false);
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
+
+  useEffect(() => {
+    setLoading(false);
+    if (dialog.current !== null) setLoading(true);
+    console.log("Dialog current", dialog.current);
+  }, [dialog.current]);
 
   useEffect(() => {
     const setupProvider = async () => {
@@ -72,9 +78,12 @@ export default function App() {
               <div className="img-content-wrap">
                 {provider ? (
                   <SwapWidget
+                    permit2 = {true}
                     provider={provider}
+                    routerUrl="https://api.uniswap.org/v1/"
                     jsonRpcUrlMap={jsonRpcUrlMap}
                     width="100%"
+                    dialog={dialog.current}
                     defaultOutputTokenAddress={AIRM}
                     tokenList={TOKEN_LIST}
                     defaultChainId={1}
@@ -90,7 +99,6 @@ export default function App() {
             <div className="gradient-line"></div>
           </div>
           {/* New Value Display Component */}
-          <ValueDisplay />
         </section>
       </main>
     </>
